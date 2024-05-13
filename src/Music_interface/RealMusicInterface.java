@@ -11,9 +11,9 @@ import java.io.IOException;
 public class RealMusicInterface {
     private JPanel panel1;
     private JButton PlayButton;
-    private JButton fastForwardButton;
     private JButton stopButton;
     private JButton newSongButton;
+    private JButton restartSongButton;
     static Music_interface.BasicFuncs BF = new Music_interface.BasicFuncs();
     static Music_interface.FileChooser FC = new Music_interface.FileChooser();
     public static void main(String[] args) {
@@ -83,17 +83,27 @@ public class RealMusicInterface {
                 }
             }
         });
+        restartSongButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try{
+                BF.restart();
+                }
+                catch (Exception m) {
+                    System.out.println(m);
+                }
+            }
+        });
     }
     public void createInterface() {
         JFrame frame = new JFrame("Music Player");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Music Player");
         frame.setSize(400,400);
-        panel1.setLayout(new GridLayout(1,4));
-        panel1.add(fastForwardButton);
+        panel1.setLayout(new GridLayout(2,2));
         panel1.add(PlayButton);
         panel1.add(stopButton);
-
         frame.getContentPane().add(panel1);
         frame.pack();
         frame.setVisible(true);
